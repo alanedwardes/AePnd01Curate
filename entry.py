@@ -17,6 +17,7 @@ def handler(event, context):
   params = [
     IMAGEMAGICK,
     DOWNLOAD_PATH,
+    '-colorspace', 'gray',
     '-resize', '1x1',
     'txt:-'
   ]
@@ -24,5 +25,11 @@ def handler(event, context):
   print('Invoking ' + ' '.join(params))
   process = subprocess.Popen(params, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
   
-  print('ffmpeg stdout: ' + process.stdout.read())
-  print('ffmpeg stderr: ' + process.stderr.read())
+  stdout = process.stdout.read()
+  print('stdout: ' + stdout)
+  
+  stderr = process.stderr.read()
+  print('stderr: ' + stderr)
+  
+  result = stdout.splitlines()[1]
+  print('result: ' + result)

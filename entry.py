@@ -4,7 +4,7 @@ import urllib
 
 s3 = boto3.resource('s3')
 
-IMAGEMAGICK_IDENTIFY = '/usr/bin/identify'
+IMAGEMAGICK = '/usr/bin/convert'
 DOWNLOAD_PATH = '/tmp/image.jpg'
 
 def handler(event, context):
@@ -15,8 +15,10 @@ def handler(event, context):
   bucket.download_file(key_name, DOWNLOAD_PATH)
 
   params = [
-    IMAGEMAGICK_IDENTIFY,
-    DOWNLOAD_PATH
+    IMAGEMAGICK,
+    DOWNLOAD_PATH,
+    '-resize', '1x1',
+    'txt:-'
   ]
   
   print('Invoking ' + ' '.join(params))

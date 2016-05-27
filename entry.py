@@ -56,6 +56,7 @@ def handler(event, context):
     IMAGEMAGICK,
     INPUT_PATH,
     '-resize', '1280x720',
+    '-quality', 100,
     OUTPUT_PATH
   ])
   

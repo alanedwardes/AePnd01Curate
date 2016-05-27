@@ -18,7 +18,7 @@ def handler(event, context):
   params = [
     IMAGEMAGICK,
     DOWNLOAD_PATH,
-    '-grayscale',
+    '-colorspace', 'gray',
     '-resize', '1x1',
     'txt:-'
   ]

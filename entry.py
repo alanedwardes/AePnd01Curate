@@ -36,6 +36,6 @@ def handler(event, context):
   print('result: ' + result)
   
   parsed = parse('0,0: ({},{},{})  #{}  {type}({r},{g},{b})', result)
-  print('Analysis type {0}. rgb: {1}, {2}, {3}'.format(result.type, parsed.r, parsed.g, parsed.b))
+  print('Analysis type {0}. rgb: {1}, {2}, {3}'.format(parsed.type, parsed.r, parsed.g, parsed.b))
   
   print(parsed)

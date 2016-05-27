@@ -27,8 +27,9 @@ def handler(event, context):
   bucket_name = urllib.unquote(event['Records'][0]['s3']['bucket']['name'])
   key_name = urllib.unquote(event['Records'][0]['s3']['object']['key'])
   
-  root = os.path.split(key_name)[0]
-  file = os.path.basename(key_name)
+  parts = key_name.split('/')
+  root = parts[0]
+  file = parts[-1]
 
   bucket = s3.Bucket(bucket_name)
   bucket.download_file(key_name, INPUT_PATH)

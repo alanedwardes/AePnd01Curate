@@ -57,7 +57,7 @@ def handler(event, context):
     INPUT_PATH,
     '-resize', '1280x720',
     '-quality', '100%',
-    '-unsharp', '1.2x1+4+0',
+    '-unsharp', '30x1+4+0',
     OUTPUT_PATH
   ])
   

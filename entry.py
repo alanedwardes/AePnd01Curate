@@ -68,7 +68,7 @@ def handler(event, context):
     '-fill', 'white',
     '-font', 'RobotoMono-Bold.ttf',
     '-stroke', 'black',
-    '-strokewidth', str(5),
+    '-strokewidth', str(2),
     '-annotate', '+75+50', created.strftime('%c'),
     OUTPUT_PATH
   ])

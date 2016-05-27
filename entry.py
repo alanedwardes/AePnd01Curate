@@ -36,5 +36,5 @@ def handler(event, context):
   result = stdout.splitlines()[1]
   print('result: ' + result)
   
-  parsed = parse('0,0: ({:d},{:d},{:d})  #{hex:d}  gray({:d},{:d},{:d})', result)
+  parsed = parse('0,0: ({},{},{})  #{}  gray({},{},{})', result)
   print(parsed)

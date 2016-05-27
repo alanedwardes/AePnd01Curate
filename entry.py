@@ -1,3 +1,4 @@
+from parse import *
 import subprocess
 import boto3
 import urllib
@@ -31,5 +32,9 @@ def handler(event, context):
   stderr = process.stderr.read()
   print('stderr: ' + stderr)
   
+  #0,0: (  0,  0,  0)  #000000  gray(0,0,0)
   result = stdout.splitlines()[1]
   print('result: ' + result)
+  
+  parsed = parse('0,0: ({:d},{:d},{:d})  #{hex:d}  gray({:d},{:d},{:d})')
+  print(parsed)

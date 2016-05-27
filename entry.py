@@ -35,7 +35,7 @@ def handler(event, context):
   
   ## ImageMagick pixel enumeration: 1,1,255,srgb
   #0,0: (  0,  0,  0)  #000000  gray(0,0,0)
-  parsed = parse('0,0: ({},{},{})  #{}  {type}({r},{g},{b})', stdout.splitlines()[1])
+  parsed = parse('0,0: ({},{},{})  #{}  {type}({r:d},{g:d},{b:d})', stdout.splitlines()[1])
   print('Analysis type {0}. rgb: {1}, {2}, {3}'.format(parsed['type'], parsed['r'], parsed['g'], parsed['b']))
   
   if parsed['r'] < THRESHOLD and parsed['g'] < THRESHOLD and parsed['b'] < THRESHOLD:

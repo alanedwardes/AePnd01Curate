@@ -1,4 +1,5 @@
 from parse import *
+from datetime import datetime, time
 import subprocess
 import boto3
 import urllib
@@ -59,7 +60,12 @@ def handler(event, context):
     OUTPUT_PATH
   ])
   
-  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), file])
+  created = object.last_modified
+  
+  midnight = datetime.combine(created.date(), time(0))
+  age = (created - midnight).seconds
+  
+  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), age + '.jpg'])
   
   print('Uploading to ' + newkey)
   bucket.upload_file(OUTPUT_PATH, newkey)

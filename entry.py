@@ -32,7 +32,8 @@ def handler(event, context):
   file = parts[-1]
 
   bucket = s3.Bucket(bucket_name)
-  bucket.download_file(key_name, INPUT_PATH)
+  object = bucket.Object(key_name)
+  object.download_file(INPUT_PATH)
 
   analysis = execute([
     IMAGEMAGICK,
@@ -58,6 +59,7 @@ def handler(event, context):
     OUTPUT_PATH
   ])
   
-  print(root)
-  print(file)
-  #bucket.upload_file(OUTPUT_PATH, os.path.join())
+  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), file])
+  print('Uploading to ' + newkey)
+  
+  #bucket.upload_file(OUTPUT_PATH, newkey)

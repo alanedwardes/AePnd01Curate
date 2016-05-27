@@ -60,7 +60,7 @@ def handler(event, context):
     OUTPUT_PATH
   ])
   
-  created = object.last_modified
+  created = object.last_modified.replace(tzinfo=None)
   
   midnight = datetime.replace(hour=0, minute=0, second=0)
   age = (created - midnight).seconds

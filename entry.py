@@ -66,7 +66,7 @@ def handler(event, context):
     '-gravity', 'southeast',
     '-pointsize', '30',
     '-fill', 'white',
-    '-font', 'fixed',
+    '-font', 'RobotoMono-Bold.ttf',
     '-undercolor', '#00000080',
     '-annotate', '+75+50', created.strftime('%c'),
     OUTPUT_PATH

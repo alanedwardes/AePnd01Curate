@@ -52,21 +52,23 @@ def handler(event, context):
     print('Image too dark, ignoring')
     return
   
+  created = object.last_modified.replace(tzinfo=None)
+  
+  midnight = created.replace(hour=0, minute=0, second=0, microsecond=0)
+  age = int((created - midnight).total_seconds())
+  
   execute([
     IMAGEMAGICK,
     INPUT_PATH,
     '-resize', '1280x720',
     '-quality', '90%',
     '-unsharp', '2x0.5+0.7+0',
+    '-gravity', 'southeast',
+    '-annotate', '+100+100', created.strftime('%c'),
     OUTPUT_PATH
   ])
   
-  created = object.last_modified.replace(tzinfo=None)
-  
-  midnight = created.replace(hour=0, minute=0, second=0, microsecond=0)
-  age = int((created - midnight).total_seconds())
-  
-  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), str(age) + '.jpg'])
+  newkey = '/'.join([root, 'curated', created.strftime('%d-%b-%Y'), str(age) + '.jpg'])
   
   print('Uploading to ' + newkey)
   bucket.upload_file(OUTPUT_PATH, newkey)

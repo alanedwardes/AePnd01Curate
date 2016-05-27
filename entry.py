@@ -1,4 +1,5 @@
 from parse import *
+import dateutil.parser
 import subprocess
 import boto3
 import urllib
@@ -30,6 +31,7 @@ def handler(event, context):
   parts = key_name.split('/')
   root = parts[0]
   file = parts[-1]
+  created = dateutil.parser.parse(os.path.splitext(file)[0])
 
   bucket = s3.Bucket(bucket_name)
   object = bucket.Object(key_name)
@@ -52,8 +54,6 @@ def handler(event, context):
     print('Image too dark, ignoring')
     return
   
-  created = object.last_modified.replace(tzinfo=None)
-  
   midnight = created.replace(hour=0, minute=0, second=0, microsecond=0)
   age = int((created - midnight).total_seconds())
   
@@ -61,7 +61,7 @@ def handler(event, context):
     IMAGEMAGICK,
     INPUT_PATH,
     '-resize', '1280x720',
-    '-quality', '90%',
+    '-quality', str(100),
     '-unsharp', '2x0.5+0.7+0',
     '-gravity', 'southeast',
     '-pointsize', '30',

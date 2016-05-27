@@ -64,7 +64,7 @@ def handler(event, context):
   midnight = created.replace(hour=0, minute=0, second=0, microsecond=0)
   age = (created - midnight).total_seconds()
   
-  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), age + '.jpg'])
+  newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), str(age) + '.jpg'])
   
   print('Uploading to ' + newkey)
   bucket.upload_file(OUTPUT_PATH, newkey)

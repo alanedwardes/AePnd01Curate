@@ -18,7 +18,6 @@ def handler(event, context):
   params = [
     IMAGEMAGICK,
     DOWNLOAD_PATH,
-    '-colorspace', 'gray',
     '-resize', '1x1',
     'txt:-'
   ]
@@ -36,5 +35,5 @@ def handler(event, context):
   result = stdout.splitlines()[1]
   print('result: ' + result)
   
-  parsed = parse('0,0: ({},{},{})  #{}  gray({},{},{})', result)
+  parsed = parse('0,0: ({},{},{})  #{}  {type}({r},{g},{b})', result)
   print(parsed)

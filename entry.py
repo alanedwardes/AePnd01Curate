@@ -1,5 +1,4 @@
 from parse import *
-from datetime import datetime, time
 import subprocess
 import boto3
 import urllib
@@ -62,8 +61,8 @@ def handler(event, context):
   
   created = object.last_modified.replace(tzinfo=None)
   
-  midnight = datetime.replace(hour=0, minute=0, second=0)
-  age = (created - midnight).seconds
+  midnight = created.replace(hour=0, minute=0, second=0, microsecond=0)
+  age = (created - midnight).total_seconds()
   
   newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), age + '.jpg'])
   

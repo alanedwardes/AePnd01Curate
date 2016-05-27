@@ -7,6 +7,7 @@ s3 = boto3.resource('s3')
 
 IMAGEMAGICK = '/usr/bin/convert'
 DOWNLOAD_PATH = '/tmp/image.jpg'
+THRESHOLD = 5 # 0-255
 
 def handler(event, context):
   bucket_name = urllib.unquote(event['Records'][0]['s3']['bucket']['name'])
@@ -37,4 +38,8 @@ def handler(event, context):
   parsed = parse('0,0: ({},{},{})  #{}  {type}({r},{g},{b})', stdout.splitlines()[1])
   print('Analysis type {0}. rgb: {1}, {2}, {3}'.format(parsed['type'], parsed['r'], parsed['g'], parsed['b']))
   
-  return None
+  if parsed['r'] < THRESHOLD and parsed['g'] < THRESHOLD and parsed['b'] < THRESHOLD:
+    print('Image too dark, ignoring')
+    return
+  
+  print('image ok')

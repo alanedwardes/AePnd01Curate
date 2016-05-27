@@ -62,7 +62,7 @@ def handler(event, context):
   
   created = object.last_modified
   
-  midnight = datetime.combine(created.date(), time(0))
+  midnight = datetime.replace(hour=0, minute=0, second=0)
   age = (created - midnight).seconds
   
   newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), age + '.jpg'])

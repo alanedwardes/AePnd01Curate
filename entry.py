@@ -64,7 +64,8 @@ def handler(event, context):
     '-quality', '90%',
     '-unsharp', '2x0.5+0.7+0',
     '-gravity', 'southeast',
-    '-annotate', '+100+100', created.strftime('%c'),
+    '-pointsize', 20,
+    '-annotate', '+75+50', created.strftime('%c'),
     OUTPUT_PATH
   ])
   

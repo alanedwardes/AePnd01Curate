@@ -60,6 +60,6 @@ def handler(event, context):
   ])
   
   newkey = '/'.join([root, 'curated', object.last_modified.strftime('%d-%b-%Y'), file])
-  print('Uploading to ' + newkey)
   
-  #bucket.upload_file(OUTPUT_PATH, newkey)
+  print('Uploading to ' + newkey)
+  bucket.upload_file(OUTPUT_PATH, newkey)

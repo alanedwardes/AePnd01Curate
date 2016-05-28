@@ -72,7 +72,7 @@ def handler(event, context):
     OUTPUT_PATH
   ])
   
-  newkey = '/'.join([root, 'curated', created.strftime('%d-%b-%Y'), str(age) + '.jpg'])
+  newkey = '/'.join([root, 'curated', created.strftime('%d-%b-%Y'), str(age).zfill(5) + '.jpg'])
   
   print('Uploading to ' + newkey)
   bucket.upload_file(OUTPUT_PATH, newkey)

@@ -10,7 +10,7 @@ s3 = boto3.resource('s3')
 IMAGEMAGICK = '/usr/bin/convert'
 INPUT_PATH = '/tmp/input.jpg'
 OUTPUT_PATH = '/tmp/output.jpg'
-THRESHOLD = 5 # 0-255
+THRESHOLD = 4 # 0-255
 
 def execute(params):
   print('Invoking ' + ' '.join(params))

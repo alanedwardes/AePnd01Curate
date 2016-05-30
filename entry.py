@@ -61,7 +61,7 @@ def handler(event, context):
     IMAGEMAGICK,
     INPUT_PATH,
     '-resize', '1280x720',
-    '-quality', str(95),
+    '-quality', str(75),
     '-gravity', 'southeast',
     '-pointsize', '30',
     '-fill', 'white',
